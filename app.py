@@ -11,9 +11,9 @@ st.title("Emotion Detection App")
 user_input = st.text_input("Enter your text:")
 
 if user_input:
-    # Transform user input
-    processed_input = vectorizer.transform([user_input])
-    # Make prediction
-    prediction = model.predict(processed_input)
-    st.write(f"Predicted sentiment: {prediction[0]}")
+    user_input = user_input.strip()
+    user_input_vector = vectorizer.transform([user_input])
+    prediction = model.predict(user_input_vector)
+    st.write(f"Prediction: {prediction[0]}")
+    
 
