@@ -3,12 +3,17 @@ import joblib
 
 # Load the model
 model = joblib.load('model.pkl')
+vectorizer = joblib.load('vectorizer.pkl')
 
 st.title("Emotion Detection App")
 
 # User input
-user_input = st.text_area("Enter your text:")
+user_input = st.text_input("Enter your text:")
 
-if st.button("Predict Emotion"):
-    prediction = model.predict([user_input])
-    st.write(f"Predicted Emotion: {prediction[0]}")
+if user_input:
+    # Transform user input
+    processed_input = vectorizer.transform([user_input])
+    # Make prediction
+    prediction = model.predict(processed_input)
+    st.write(f"Predicted sentiment: {prediction[0]}")
+
